@@ -16,7 +16,22 @@ class ProfileView extends GetView<ProfileController> {
         actions: [
           IconButton(
             icon: const Icon(Icons.logout),
-            onPressed: controller.logout,
+            onPressed: () {
+              Get.defaultDialog(
+                title: "Konfirmasi Logout",
+                middleText: "Apakah Anda yakin ingin keluar?",
+                textCancel: "Batal",
+                textConfirm: "Logout",
+                confirmTextColor: Colors.white,
+                onConfirm: () {
+                  controller.logout();
+                  Get.back(); // Menutup dialog setelah logout
+                },
+                onCancel: () {
+                  Get.back(); // Menutup dialog jika batal
+                },
+              );
+            },
           ),
         ],
       ),
